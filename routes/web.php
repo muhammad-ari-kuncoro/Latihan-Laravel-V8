@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\PostController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,84 +22,16 @@ Route::get('/', function () {
         'title' => 'Home Page'
     ]);
 });
-
-Route::get('/posts', function () {
-
-
-$blog_posts = [
-
-    [
-     "title" => "judul Post Pertama",
-     "slug" => 'Judul_Post_Pertama',
-     "author" => "Muhammad ari kuncoro",
-     "body" => "
-     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis dolore repudiandae rerum fuga voluptate hic nihil accusantium, eligendi beatae corporis odio ab laboriosam eum, eveniet facere dignissimos explicabo facilis qui minima similique quisquam. Dolores sint dicta deleniti nemo quam ratione, tempore assumenda saepe vero expedita eius laborum, nesciunt tempora suscipit?"
-    ] ,
-
-    [
-     "title" => "judul Post Kedua",
-     "slug" => 'Judul_Post_Kedua',
-     "author" => "Muhammad ari ",
-     "body" => "
-     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis dolore repudiandae rerum fuga voluptate hic nihil accusantium, eligendi beatae corporis odio ab laboriosam eum, eveniet facere ?"
-    ] ,
-
- ];
+Route::get('/posts',[PostController::class, 'index']);
 
 
-    return view('posts',[
-        'title_navbar' => 'Blog',
-        'title' => 'Blog Page',
-        'posts' => $blog_posts
-
-    ]);
-});
-
-
+// Single Page Blog Posts
+Route::get('/post/{slug}',[PostController::class,'show']);
 
 Route::get('/about', function () {
     return view('about' ,[
         'title_navbar' => 'About',
+        'name' => 'Muhammad ari kuncoro',
         'title' => 'About Page',
     ]);
-});
-
-
-
-// Single Page Blog Posts
-Route::get('post/{slug}', function($slug){
-
-    $blog_posts = [
-
-        [
-         "title" => "judul Post Pertama",
-         "slug" => 'Judul_Post_Pertama',
-         "author" => "Muhammad ari kuncoro",
-         "body" => "
-         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis dolore repudiandae rerum fuga voluptate hic nihil accusantium, eligendi beatae corporis odio ab laboriosam eum, eveniet facere dignissimos explicabo facilis qui minima similique quisquam. Dolores sint dicta deleniti nemo quam ratione, tempore assumenda saepe vero expedita eius laborum, nesciunt tempora suscipit?"
-        ] ,
-
-        [
-         "title" => "judul Post Kedua",
-         "slug" => 'Judul_Post_Kedua',
-         "author" => "Muhammad ari ",
-         "body" => "
-         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis dolore repudiandae rerum fuga voluptate hic nihil accusantium, eligendi beatae corporis odio ab laboriosam eum, eveniet facere ?"
-        ] ,
-
-     ];
-
-     $new_post = [];
-    foreach ($blog_posts as $post) {
-        if ($post['slug'] === $slug) {
-            $new_post   = $post;
-        }
-    }
-
-
-return view('post',[
-    'title_navbar' => 'Blog',
-    'title' => 'Single Post Page',
-    'post'  => $new_post
-]);
 });
