@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
-use App\Models\Post;
+use App\Models\Postblog;
 use Illuminate\Support\Facades\Route;
 
 
