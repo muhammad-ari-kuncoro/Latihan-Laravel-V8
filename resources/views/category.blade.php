@@ -4,7 +4,7 @@
 @section('container')
 @foreach ($posts as $post )
 <article class="mb-3 mt-3">
-
+    <h1 class="mb-5">Post Category : {{ $category }}</h1>
     <h1>
         <a href="/post/{{ $post->slug }}">{{ $post->title }}</a></h1>
     <h2>By: {{ $post->author }}</h2>

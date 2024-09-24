@@ -5,7 +5,7 @@ use App\Models\Postblog;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\Category;
 class PostController extends Controller
 {
     //
@@ -18,11 +18,12 @@ class PostController extends Controller
     
         ]);
     }
-    public function show($slug){
+    public function show(Post $post){
         return view('post',[
             'title_navbar' => 'Blog',
             'title' => 'Single Post Page',
-            'post'  => Post::find($slug)
+            'post'  => $post,
+            'category' =>$post->category->name
         ]);
     }
 }

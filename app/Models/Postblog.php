@@ -41,6 +41,7 @@ class Postblog
                 // if ($p['slug'] === $slug) {
                 //      $post  = $p;
                 // }
+                
                 return $posts->firstWhere('slug', $slug);
             }
 
